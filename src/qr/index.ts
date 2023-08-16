@@ -1,4 +1,4 @@
-import makeQRCode from "./qrcode"
+import makeQRCode from "./lib/qrcode"
 
 export default function createQRSlideshow(data: string, dim: number) {
 
