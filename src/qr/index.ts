@@ -46,7 +46,7 @@ function chunkString(data: string, options: ChunkOptions) {
     for (let i = 0; i < data.length; i += options.maxLength)
         slices.push(data.slice(i, i + options.maxLength))
 
-    return slices.map(slice => ({ data: slice, 
-        index: 0, total: slices.length 
+    return slices.map((slice, index) => ({ data: slice, 
+        index, total: slices.length 
     }))
 }
