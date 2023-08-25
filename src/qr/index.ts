@@ -42,7 +42,7 @@ interface ChunkOptions { maxLength: number }
 
 function chunkString(data: string, options: ChunkOptions) {
 
-    const slices = [data.slice(0, options.maxLength)]
+    const slices = []
     for (let i = 0; i < data.length; i += options.maxLength)
         slices.push(data.slice(i, i + options.maxLength))
 
