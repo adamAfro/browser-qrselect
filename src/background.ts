@@ -1,7 +1,5 @@
 import { set } from "./storage"
 
-console.debug(browser.action)
-
 setMenuAction({ title: 'QR', contexts: ['all'] }, (context) => {
 
     set('selection', context.selectionText)
@@ -11,7 +9,7 @@ setMenuAction({ title: 'QR', contexts: ['all'] }, (context) => {
 
 
 
-declare const browser: any
+declare const chrome: any
 
 interface Widget { title: string, icon: string }
 
@@ -25,7 +23,7 @@ interface Tab { id: number }
  */
 export function setWidgetAction(widget: Widget, action: (tab: Tab) => void) {
 
-    browser.action.onClicked.addListener(action)
+    chrome.action.onClicked.addListener(action)
 }
 
 
@@ -41,8 +39,8 @@ export async function setMenuAction(item: MenuItem, action: (context: ContextInf
     if (!item.contexts)
         item.contexts = ['all']
 
-    await browser.contextMenus.create(item, () => void browser.runtime.lastError)
-    await browser.contextMenus.onClicked.addListener(action)
+    await chrome.contextMenus.create(item, () => void chrome.runtime.lastError)
+    await chrome.contextMenus.onClicked.addListener(action)
 }
 
 
@@ -51,15 +49,15 @@ interface PopupChange { url?: string, keep?: boolean }
 
 async function popup(change: PopupChange) {
 
-    const previous = browser.action.getPopup({})
+    const previous = chrome.action.getPopup({})
     const changing = change.url ?
-        browser.action.setPopup({ popup: change.url }) :
+        chrome.action.setPopup({ popup: change.url }) :
         Promise.resolve()
 
-    const opening = await browser.action.openPopup()
+    const opening = await chrome.action.openPopup()
     await changing
     if (!change.keep)
-        await browser.action.setPopup({ popup: await previous })
+        await chrome.action.setPopup({ popup: await previous })
 
     return opening
 }

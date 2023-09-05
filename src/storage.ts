@@ -1,8 +1,8 @@
-declare const browser: any
+declare const chrome: any
 
 export async function get(key: string) {
 
-    const data = await browser.storage.local.get(key)
+    const data = await chrome.storage.local.get(key)
     if ( !data)
         return undefined
         
@@ -11,10 +11,10 @@ export async function get(key: string) {
 
 export async function set(key: string, data: any) {
     
-    return browser.storage.local.set({ [key]: data})
+    return chrome.storage.local.set({ [key]: data})
 }
 
 export async function remove(key: string) {
 
-    return browser.storage.local.remove(key)
+    return chrome.storage.local.remove(key)
 }
