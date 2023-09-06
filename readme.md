@@ -3,20 +3,19 @@
 Read and write data between devices with slideshow of QR codes.
 
 - [x] make readable QR codes from input
-- [ ] let input files
+- [x] let file input
 - [ ] read QR codes with camera
+
+---
+
+It is basically a copy of [gre/qrloop](https://github.com/gre/qrloop) but for UTF-8 and without package providers.
 
 ## Browser extension
 
-Right now `browser` variable is replaced with `chrome`, which should be done by bundle, but here it is...
+Browser extension adds button to context menu so that QR code is made from text selection and displayed in popup
 
-Problem with Chrome is that it does not include new lines in selection. It seems the issue is not resolved yet and has been going for a long time.
-
-## Dev&deps
-
-- [fork of](https://github.com/adamAfro/qrcode-svg) datalog/[qrcode-svg](https://github.com/datalog/qrcode-svg) under MIT
-
-Install [deno](https://deno.land/) and optionally cache [esbuild](https://esbuild.github.io/)
+- [ ] make bundler switch between `chrome` and `browser` variables depending on target: Chrome or Firefox;
+- [] handle Chrome issue - text selection does not include new lines.
 
 Bundle and make distribution package with browser extension:
 
@@ -24,7 +23,13 @@ Bundle and make distribution package with browser extension:
 deno run bundle.ts --zip
 ```
 
-While developing use browser extension:
+## Dev&deps
+
+- [fork of](https://github.com/adamAfro/qrcode-svg) datalog/[qrcode-svg](https://github.com/datalog/qrcode-svg) under MIT
+
+Install [deno](https://deno.land/) and optionally cache [esbuild](https://esbuild.github.io/)
+
+While developing use:
 
 ```
 deno run -A --watch=./src bundle.ts

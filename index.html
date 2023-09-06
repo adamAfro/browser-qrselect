@@ -29,6 +29,7 @@
                 
             } .panes > * {
 
+                position: relative;
                 box-sizing: content-box;
                 flex-shrink: 0;
 
@@ -55,12 +56,20 @@
             }
             
             #input {
-                display: block; height: 100%;
+                display: block; 
+                width: 100%; min-height: 10cm;
                 border: 0; padding: 0;
                 box-shadow: 0 0 1em -.5em;
                 
                 resize: none;
                 outline: none;
+            }
+
+            #file { display: none; }
+            #fileBtn { 
+                position: absolute;
+                background-color: white;
+                bottom: 0;
             }
 
         </style>
@@ -75,7 +84,12 @@
                 <input id="msPerFrame" type="range" value="250" min="100" max="1000">
             </div>
     
-            <textarea spellcheck="false" id="input"></textarea>
+            <div>
+                <textarea placeholder="Write something or drop a file"
+                    spellcheck="false" id="input"></textarea>
+                <input id="file" type="file">
+                <label id="fileBtn" for="file">Select file</label>
+            </div>
 
             <div>
                 

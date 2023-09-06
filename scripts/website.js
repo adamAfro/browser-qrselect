@@ -294,12 +294,54 @@
   // src/website.ts
   var container = document.getElementById("slideshow");
   var input = document.getElementById("input");
+  var file = document.getElementById("file");
   var mspfInput = document.getElementById("msPerFrame");
-  input.addEventListener("change", async () => {
+  input.addEventListener("change", createQRSlideshow2);
+  input.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    input.dataset.filedrag = "true";
+  });
+  input.addEventListener("dragleave", () => {
+    input.dataset.filedrag = "false";
+  });
+  input.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    input.dataset.filedrag = "false";
+    const files = Array.from(e.dataTransfer.files);
+    const contents = await Promise.all(files.map((f) => readFile(f)));
+    input.value += contents.join("\n");
+    createQRSlideshow2();
+  });
+  file.addEventListener("change", async () => {
+    const files = Array.from(file.files);
+    const contents = await Promise.all(files.map((f) => readFile(f)));
+    input.value += contents.join("\n");
+    createQRSlideshow2();
+  });
+  function createQRSlideshow2() {
     const slides = createQRSlideshow(input.value, container.offsetWidth);
     container.innerHTML = "";
     container.append(...slides);
     startSlideshow(slides, mspfInput);
-  });
+  }
+  async function readFile(file2) {
+    if (!file2) {
+      console.error("No file provided.");
+      return "";
+    }
+    const reader = new FileReader();
+    return new Promise((ok, er) => {
+      reader.onload = (event) => {
+        const fileContent = ArrayBuffer.isView(event.target.result) ? arrayBufferToString(event.target.result) : event.target.result;
+        ok(fileContent);
+      };
+      reader.readAsText(file2);
+    });
+  }
+  function arrayBufferToString(arrayBuffer) {
+    const uint8Array = new Uint8Array(arrayBuffer);
+    const textDecoder = new TextDecoder("utf-8");
+    return textDecoder.decode(uint8Array);
+  }
 })();
 //# sourceMappingURL=website.js.map
