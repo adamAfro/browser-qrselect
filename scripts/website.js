@@ -256,7 +256,7 @@
 
   // src/qr/index.ts
   function createQRSlideshow(data, dim) {
-    const chunks = chunkString(data, { maxLength: 256 });
+    const chunks = chunkString(data, { maxLength: 128 });
     console.log(chunks);
     const slides = [];
     for (const chunk of chunks) {

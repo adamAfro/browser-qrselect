@@ -2,7 +2,7 @@ import makeQRCode from "./lib/qrcode"
 
 export default function createQRSlideshow(data: string, dim: number) {
 
-    const chunks = chunkString(data, { maxLength: 256 })
+    const chunks = chunkString(data, { maxLength: 128 })
     console.log(chunks)
     const slides = [] as SVGElement[]
     for (const chunk of chunks) {
