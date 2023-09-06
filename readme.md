@@ -1,6 +1,6 @@
-# QR Selection
+# QR RW
 
-Select text and make QR slideshow with it's content
+Read and write data between devices with 
 
 ## Dev&deps
 

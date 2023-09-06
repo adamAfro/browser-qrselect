@@ -1,7 +1,7 @@
 import { build, stop } // @ts
     from 'https://deno.land/x/esbuild@v0.18.11/mod.js'
 
-const scripts = ['background', 'popup']
+const scripts = ['background', 'popup', 'website']
 
 for (const name of [scripts].flat()) await build({
 

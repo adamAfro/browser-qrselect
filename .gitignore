@@ -1,4 +1,6 @@
-/scripts
+/scripts/*.map
+/scripts/background.js
+/scripts/popup.js
 /icons
 /dist.xpi
 /source.zip

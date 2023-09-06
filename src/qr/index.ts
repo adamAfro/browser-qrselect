@@ -3,6 +3,7 @@ import makeQRCode from "./lib/qrcode"
 export default function createQRSlideshow(data: string, dim: number) {
 
     const chunks = chunkString(data, { maxLength: 256 })
+    console.log(chunks)
     const slides = [] as SVGElement[]
     for (const chunk of chunks) {
 
@@ -19,7 +20,7 @@ export default function createQRSlideshow(data: string, dim: number) {
     return slides
 }
 
-export function startSlideshow(slides: SVGElement[], fpsInput) {
+export function startSlideshow(slides: SVGElement[], mspfInput) {
 
     slides[0].style.display = ""
 
@@ -30,10 +31,10 @@ export function startSlideshow(slides: SVGElement[], fpsInput) {
         i = (i + 1) % n
         slides[i].style.display = ""
 
-        setTimeout(changeFrame, parseInt(fpsInput.value))
+        setTimeout(changeFrame, parseInt(mspfInput.value))
     }
 
-    setTimeout(changeFrame, parseInt(fpsInput.value))
+    setTimeout(changeFrame, parseInt(mspfInput.value))
 }
 
 
